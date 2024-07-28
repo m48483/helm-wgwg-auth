@@ -42,7 +42,7 @@ securityContext:
   # runAsUser: 1000
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 8080
 
 ingress:
@@ -54,7 +54,7 @@ ingress:
   hosts:
     # - host: chart-example.local
     paths:
-      - path: /
+      - path: /api/v1
         pathType: Prefix
   tls: []
   #  - secretName: chart-example-tls
@@ -78,7 +78,7 @@ resources:
 livenessProbe:
   httpGet:
     path: /health
-    port: 8080
+    port: http
   initialDelaySeconds: 60
   timeoutSeconds: 10
   periodSeconds: 20
@@ -87,7 +87,7 @@ livenessProbe:
 readinessProbe:
   httpGet:
     path: /health
-    port: 8080
+    port: http
   initialDelaySeconds: 60
   timeoutSeconds: 10
   periodSeconds: 10
